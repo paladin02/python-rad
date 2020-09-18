@@ -1,40 +1,37 @@
-import threading
 import time
 import requests
-exitFlag = 0
+import sys
+from pydub import AudioSegment
+DELAY = 1 * 1 * 1
 while True:
-   class myThread (threading.Thread):
+    t = time.localtime()
+    out = ("%d-%d-%d%-d-%d-%d" % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec))
+    time.sleep(DELAY)
 
-      def __init__(self, threadID, name, counter):
-         threading.Thread.__init__(self)
-         self.threadID = threadID
-         self.name = name
-         self.counter = counter
+    files_path = "C:\\Users\\hp\\Desktop\\"
+    file_name = out
 
-      def run(self):
-         print ("Starting " + self.name)
-         print_time(self.name, self.counter, 86400)
-         print ("Exiting " + self.name)
+    startMin = 1
+    startSec = 00
 
-   def print_time(threadName, delay, counter):
-      while counter:
-         if exitFlag:
-            threadName.exit()
-         time.sleep(delay)
-         print ("%s: %s" % (threadName, time.ctime(time.time())))
-         counter -= 1
+    endMin = 10
+    endSec = 00
 
-   thread1 = myThread(1, "stream.mp3", 1)
+    startTime = startMin * 1 * 1 + startSec * 1000
+    endTime = endMin * 10 * 1 + endSec * 1
 
-   thread1.start()
-   stream_url = "http://scturkmedya.radyotvonline.com/stream/80/"
-   r = requests.get(stream_url, stream=True)
-   with open('stream.mp3', 'wb') as f:
-      try:
-         for block in r.iter_content(1024):
-            f.write(block)
-      except KeyboardInterrupt:
-         pass
-   thread1.join()
+    # Opening file and extracting segment
+    song = AudioSegment.from_mp3(files_path + file_name + '.mp3')
+    extract = song[startTime: endTime]
 
+    # Saving
+    extract.export(file_name + '-extract.mp3', format="mp3")
 
+    stream_url = "http://scturkmedya.radyotvonline.com/stream/80/"
+    r = requests.get(stream_url, stream=True)
+    with open(out, 'wb') as f:
+        try:
+            for block in r.iter_content(1024):
+                f.write(block)
+        except KeyboardInterrupt:
+            pass
