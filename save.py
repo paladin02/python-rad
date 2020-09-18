@@ -1,10 +1,9 @@
 import time
 import requests
-import sys
 from pydub import AudioSegment
 DELAY = 1 * 1 * 1
 t = time.localtime()
-out = ("%d-%d-%d%-d-%d-%d" % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec))
+out = ("%d-%d-%d%-d-%d-%d.mp3" % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec))
 time.sleep(DELAY)
 
 stream_url = "http://scturkmedya.radyotvonline.com/stream/80/"
