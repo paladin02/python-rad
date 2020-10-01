@@ -32,3 +32,11 @@ while True:
     song = AudioSegment.from_mp3(files_path + file_name)
     extract = song[startTime: endTime]
     extract.export(file_name + '-extract.mp3', format="mp3")
+
+
+
+
+
+
+
+
