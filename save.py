@@ -16,8 +16,6 @@ while True:
         try:
             for block in r.iter_content(1024):
                 f.write(block)
-                break
-                time.sleep(1)
         except KeyboardInterrupt:
             pass
         finally:
