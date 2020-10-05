@@ -13,6 +13,5 @@ while True:
 
     with open(out, 'wb') as f:
         for block in r.iter_content(1024):
-
             f.write(block)
             break
