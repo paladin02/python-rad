@@ -1,12 +1,13 @@
 import time
 import requests
+
 while True:
     t = time.localtime()
 
     out = ("%d-%d-%d-%d-%d-%d.mp3" % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec))
 
-    time.sleep(1)
     print(out)
+    time.sleep(5)
 
     stream_url = "http://scturkmedya.radyotvonline.com/stream/80/"
     r = requests.get(stream_url, stream=True)
@@ -19,3 +20,5 @@ while True:
                 time.sleep(1)
         except KeyboardInterrupt:
             pass
+        finally:
+            f.close()
