@@ -10,9 +10,12 @@ while True:
 
     stream_url = "http://scturkmedya.radyotvonline.com/stream/80/"
     r = requests.get(stream_url, stream=True)
+
     with open(out, 'wb') as f:
         try:
             for block in r.iter_content(1024):
                 f.write(block)
+                break
+                time.sleep(1)
         except KeyboardInterrupt:
             pass
