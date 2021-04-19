@@ -13,4 +13,4 @@ while True:
         for block in r.iter_content(1024):
              f.write(block)
              time.sleep(3)
-             os.execl(sys.executable, sys.executable, *sys.argv)
+             break
