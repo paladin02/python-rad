@@ -18,7 +18,7 @@ while True:
     stream_url = "http://scturkmedya.radyotvonline.com/stream/80/"
     r = requests.get(stream_url, stream=True)
     with open(out,"wb") as f:
-        for block in r.iter_content(1024):
+        for block in r.iter_content(57601968):
             f.write(block)
             time.sleep(3)
             break
