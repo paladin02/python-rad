@@ -40,7 +40,7 @@ while True:
     cursor2.execute("INSERT INTO output(file) VALUES(%s)",(list,));
     r = requests.get(link, stream=True)
     with open(out,"wb") as f:
-        for block in r.iter_content(1024):
+        for block in r.iter_content(57601968):
             f.write(block)
             break
     conn1.commit();
