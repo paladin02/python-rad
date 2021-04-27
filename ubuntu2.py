@@ -3,6 +3,7 @@ import time
 import requests
 import sys
 import psycopg2
+list = ""
 try:
 	conn = psycopg2.connect("dbname='hasbel' user='paladin' password='123'")
 	print("Connected")
@@ -23,7 +24,6 @@ try:
 		print(link)
 except:
 	print("no")
-
 path = "/home/paladin/Masaüstü/"
 try:
     os.chdir(path)
@@ -32,11 +32,16 @@ except FileNotFoundError:
     pass
 while True:
     t = time.localtime()
-    out = ("%d-%d-%d-%d-%d-%d.mp3" % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec))
+    out = ("%d-%d-%d-%d:%d:%d.mp3" % (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec))
+    list = out
+    print("Database Name : ",list) 
     print(out)
     time.sleep(3)
+    cursor2.execute("INSERT INTO output(file) VALUES(%s)",(list,));
     r = requests.get(link, stream=True)
     with open(out,"wb") as f:
         for block in r.iter_content(1024):
             f.write(block)
             break
+    conn1.commit();
+   
