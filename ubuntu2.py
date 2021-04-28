@@ -37,7 +37,7 @@ while True:
     print("Database Name : ",list) 
     print(out)
     time.sleep(3)
-    cursor2.execute("INSERT INTO output(file) VALUES(%s)",(list,));
+    cursor2.execute("INSERT INTO output(files,path) VALUES(%s,%s)",(list,path));
     r = requests.get(link, stream=True)
     with open(out,"wb") as f:
         for block in r.iter_content(57601968):
